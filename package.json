@@ -1,0 +1,10 @@
+{
+    "id": "peng-ListCheckBox",
+    "name": "ListCheckBox",
+    "version": "1.0.0",
+    "description": "列表checkBox组件，可自定义列表内容",
+    "keywords": [
+        "列表",
+        "checkBox"
+    ]
+}
