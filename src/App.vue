@@ -20,7 +20,7 @@
 <script>
 import Vue from 'vue';
 // import ListCheckBox from "./components/ListCheckBox.vue";
-import ListCheckBox from './components/ListCheckBox'
+import ListCheckBox from './components'
 Vue.use(ListCheckBox)
 export default {
   data() {

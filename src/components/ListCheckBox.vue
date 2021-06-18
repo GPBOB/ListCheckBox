@@ -2,7 +2,7 @@
   <div class="lcb-container">
     <div class="lcb-all">
       <div
-        v-if="!disabledAll"
+        v-show="!disabledAll"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -11,17 +11,17 @@
         @click="selectAllData"
       >
         <div
-          v-if="isSelectAll && type != 'custom'"
+          v-show="isSelectAll && type != 'custom'"
           class="lcb-check-btn-active"
           :style="{
             'background-color': defaultColor,
             'border-radius': type == 'circle' && '50%',
           }"
         ></div>
-        <slot v-if="isSelectAll && type == 'custom'" name="customBtn"></slot>
+        <slot v-show="isSelectAll && type == 'custom'" name="customBtn"></slot>
       </div>
       <div
-        v-if="disabledAll"
+        v-show="disabledAll"
         class="lcb-check-btn"
         :style="{ 'border-radius': type == 'circle' && '50%' }"
       >
@@ -38,7 +38,7 @@
     <div class="lcb-content">
       <div class="lcb-item" v-for="(item, index) in checkData" :key="index">
         <div
-          v-if="!item.disabled"
+          v-show="!item.disabled"
           class="lcb-check-btn"
           :style="{
             'border-radius': type == 'circle' && '50%',
@@ -47,7 +47,7 @@
           @click="select(item, index)"
         >
           <div
-            v-if="item.selected && type != 'custom'"
+            v-show="item.selected && type != 'custom'"
             class="lcb-check-btn-active"
             :style="{
               'background-color': defaultColor,
@@ -55,13 +55,13 @@
             }"
           ></div>
           <slot
-            v-if="item.selected && type == 'custom'"
+            v-show="item.selected && type == 'custom'"
             name="customBtn"
           ></slot>
         </div>
 
         <div
-          v-if="item.disabled"
+          v-show="item.disabled"
           class="lcb-check-btn"
           :style="{ 'border-radius': type == 'circle' && '50%' }"
         >
@@ -72,7 +72,7 @@
             ]"
             :style="{ 'border-radius': type == 'circle' && '50%' }"
           ></div>
-          <!-- <slot v-if="type=='custom'" name="customDisabledBtn"></slot> -->
+          <!-- <slot v-show="type=='custom'" name="customDisabledBtn"></slot> -->
         </div>
         <slot name="checkSlot" :data="data[index]"></slot>
       </div>

@@ -1,16 +1,17 @@
 {
   "name": "vue-list-checkbox",
-  "version": "1.0.1",
+  "version": "1.0.8",
   "private": false,
+  "license": "MIT",
   "description":"列表选择组件VUE2版本",
-  "main":"ListCheckBox.umd.min.js",
+  "main":"lib/vue-list-checkbox.umd.min.js",
   "keyword":"list checkBox 列表 多选",
   "author":"gp",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib":"vue-cli-service build --target lib --name ListCheckBox"
+    "lib":"vue-cli-service build --target lib --name vue-list-checkbox --dest lib src/components/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
