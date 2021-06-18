@@ -41,3 +41,5 @@ data数据格式为：
 				<image style="width: 15px;height: 15px;" src="../../static/select.png" mode=""></image>
 </template>
 ```
+##github
+https://github.com/GPBOB/ListCheckBox/tree/vue2.0
