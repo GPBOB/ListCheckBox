@@ -9,12 +9,10 @@
 | disabledAll  |  boolean | false | 禁止全选 |
 | data  |  array | [] | 数据 |
 | allText  | string | 全选 | 全选文本 |
-
 ##方法
 |  方法名 | 返回值 |
 |  ----  | ----  | 
 |  select | 选中的数据 |
-
 ##data数据说明：
 data数据格式为：
 ```
@@ -33,7 +31,23 @@ data数据格式为：
 ```
 其中selected默认为false,disabled默认为false,可设置。
 其余数据可自定义设置
-
+#使用方法
+```
+<ListCheckBox
+      :selectAll="false"
+      :data="data"
+      @select="selectData"
+    >
+      <template v-slot:checkSlot="item">
+        <div class="test">
+          <p>{{ item.data.name }}</p>
+          <p>{{ item.data.value }}</p>
+        </div>
+      </template>
+      <template v-slot:customBtn>
+      </template>
+    </ListCheckBox>
+```
 ##type为custom时，自定义选择效果：
 ```
 //添加插槽名为customBtn

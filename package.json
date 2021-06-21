@@ -1,6 +1,6 @@
 {
   "name": "vue-list-checkbox",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": false,
   "license": "MIT",
   "description":"列表选择组件VUE2版本",
