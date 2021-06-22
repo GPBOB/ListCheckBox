@@ -1,11 +1,11 @@
 {
   "name": "vue-list-checkbox",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "private": false,
   "license": "MIT",
   "description":"列表选择组件VUE2版本",
   "main":"lib/vue-list-checkbox.umd.min.js",
-  "keyword":"list checkBox 列表 多选",
+  "keywords":["list", "checkBox", "列表", "多选","vue-list-checkbox","vue-list","list-checkbox","checkbox-list","自定义列表","custom-list","自定义checkbox","custom-checkbox"],
   "author":"gp",
   "scripts": {
     "serve": "vue-cli-service serve",
