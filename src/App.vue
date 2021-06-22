@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <ListCheckBox
+      type="custom"
       :selectAll="false"
       :data="data"
       @select="selectData"
@@ -12,6 +13,10 @@
         </div>
       </template>
       <template v-slot:customBtn>
+        <img style="width:16px;height:16px" src="./static/select.png" alt="">
+      </template>
+      <template v-slot:customDisabledBtn>
+        <img style="width:16px;height:16px" src="./static/disabledSel.png" alt="">
       </template>
     </ListCheckBox>
   </div>
@@ -19,7 +24,6 @@
 
 <script>
 import Vue from 'vue';
-// import ListCheckBox from "./components/ListCheckBox.vue";
 import ListCheckBox from './components'
 Vue.use(ListCheckBox)
 export default {

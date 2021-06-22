@@ -1,6 +1,6 @@
 <template>
   <div class="lcb-container">
-    <div class="lcb-all">
+    <div class="lcb-all" v-if="isAll" :style="{'padding-top':padding+'px','padding-bottom':padding+'px'}">
       <div
         v-show="!disabledAll"
         class="lcb-check-btn"
@@ -11,14 +11,14 @@
         @click="selectAllData"
       >
         <div
-          v-show="isSelectAll && type != 'custom'"
+          v-if="isSelectAll && type != 'custom'"
           class="lcb-check-btn-active"
           :style="{
             'background-color': defaultColor,
             'border-radius': type == 'circle' && '50%',
           }"
         ></div>
-        <slot v-show="isSelectAll && type == 'custom'" name="customBtn"></slot>
+        <slot v-if="isSelectAll && type == 'custom'" name="customBtn"></slot>
       </div>
       <div
         v-show="disabledAll"
@@ -36,7 +36,7 @@
       <p>{{ allText }}</p>
     </div>
     <div class="lcb-content">
-      <div class="lcb-item" v-for="(item, index) in checkData" :key="index">
+      <div class="lcb-item" v-for="(item, index) in checkData" :key="index" :style="{'padding-top':padding+'px','padding-bottom':padding+'px'}">
         <div
           v-show="!item.disabled"
           class="lcb-check-btn"
@@ -47,7 +47,7 @@
           @click="select(item, index)"
         >
           <div
-            v-show="item.selected && type != 'custom'"
+            v-if="item.selected && type != 'custom'"
             class="lcb-check-btn-active"
             :style="{
               'background-color': defaultColor,
@@ -55,7 +55,7 @@
             }"
           ></div>
           <slot
-            v-show="item.selected && type == 'custom'"
+            v-if="item.selected && type == 'custom'"
             name="customBtn"
           ></slot>
         </div>
@@ -72,7 +72,7 @@
             ]"
             :style="{ 'border-radius': type == 'circle' && '50%' }"
           ></div>
-          <!-- <slot v-show="type=='custom'" name="customDisabledBtn"></slot> -->
+          <slot v-if="type=='custom'" name="customDisabledBtn"></slot>
         </div>
         <slot name="checkSlot" :data="data[index]"></slot>
       </div>
@@ -113,6 +113,12 @@ export default {
       type: Boolean,
       default: false,
     },
+    //是否全选
+    isAll: {
+      type: Boolean,
+      default: true,
+    },
+    
     //禁止全选
     disabledAll: {
       type: Boolean,
@@ -129,6 +135,11 @@ export default {
     allText: {
       type: String,
       default: "全选",
+    },
+    //列表上下padding
+    padding:{
+      type: Number,
+      default: 0,
     },
   },
   computed: {
@@ -218,8 +229,8 @@ export default {
 
 <style scoped>
 .lcb-check-btn {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 1px solid #b8b9ba;
   margin-right: 20px;
   display: flex;
@@ -232,25 +243,26 @@ export default {
   display: inline-block;
   width: 10px;
   height: 10px;
+  border-radius: 2px;
   background-color: #000;
 }
 
 .lcb-check-btn-disabled {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   background-color: #dddddd;
 }
 
 .lcb-check-btn-disabled-check {
   width: 10px;
   height: 10px;
+  border-radius: 2px;
 }
 .lcb-all {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e3e3e3;
-  padding-bottom: 15px;
 }
 
 .lcb-content {
@@ -261,6 +273,5 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e3e3e3;
-  padding: 15px 0px;
 }
 </style>
