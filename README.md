@@ -12,7 +12,7 @@
 | disabledAll  |  boolean | false | 否 |禁止全选 |
 | data  |  array | [] | 是 |数据 |
 | allText  | string | 全选 | 否 |全选文本 |
-| padding  | number | 0 | 否 |列表上下padding |
+| padding  | number | 10 | 否 |列表上下padding |
 
 ## 方法
 |  方法名 | 返回值 |
@@ -39,6 +39,16 @@ data数据格式为：
 
 其中selected默认为false,disabled默认为false,可设置。
 其余数据可自定义设置
+## 自定义内容
+```
+ <template v-slot:checkSlot="item">
+        <div class="test">
+          <p>{{ item.data.name }}</p>
+          <p>{{ item.data.value }}</p>
+        </div>
+ </template>
+```
+
 
 ## 使用方法(例子)
 

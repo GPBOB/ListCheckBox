@@ -2,7 +2,7 @@
   <div class="lcb-container">
     <div class="lcb-all" v-if="isAll" :style="{'padding-top':padding+'px','padding-bottom':padding+'px'}">
       <div
-        v-show="!disabledAll"
+        v-if="!disabledAll"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -25,7 +25,9 @@
         class="lcb-check-btn"
         :style="{ 'border-radius': type == 'circle' && '50%' }"
       >
+      <slot v-if="type=='custom'" name="customDisabledBtn"></slot>
         <div
+        v-else
           :class="[
             'lcb-check-btn-disabled',
             isSelectAll && 'lcb-check-btn-disabled-check',
@@ -65,14 +67,16 @@
           class="lcb-check-btn"
           :style="{ 'border-radius': type == 'circle' && '50%' }"
         >
+        <slot v-if="type=='custom'" name="customDisabledBtn"></slot>
           <div
+          v-else
             :class="[
               'lcb-check-btn-disabled',
               item.selected && 'lcb-check-btn-disabled-check',
             ]"
             :style="{ 'border-radius': type == 'circle' && '50%' }"
           ></div>
-          <slot v-if="type=='custom'" name="customDisabledBtn"></slot>
+          
         </div>
         <slot name="checkSlot" :data="data[index]"></slot>
       </div>
@@ -113,7 +117,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    //是否全选
+    //是否显示全选
     isAll: {
       type: Boolean,
       default: true,
@@ -139,7 +143,7 @@ export default {
     //列表上下padding
     padding:{
       type: Number,
-      default: 0,
+      default: 10,
     },
   },
   computed: {

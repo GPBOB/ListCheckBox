@@ -1,8 +1,8 @@
 <template>
   <div class="content">
     <ListCheckBox
-      type="custom"
       :selectAll="false"
+      :disabledAll="true"
       :data="data"
       @select="selectData"
     >
