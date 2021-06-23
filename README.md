@@ -12,7 +12,7 @@
 | disabledAll  |  boolean | false | 否 |禁止全选 |
 | data  |  array | [] | 是 |数据 |
 | allText  | string | 全选 | 否 |全选文本 |
-| padding  | number | 0 | 否 |列表上下padding |
+| padding  | number | 10 | 否 |列表上下padding |
 
 ## 方法
 |  方法名 | 返回值 |
