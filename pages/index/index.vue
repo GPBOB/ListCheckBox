@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<ListCheckBox type="custom" :selectAll="false" :data="data" @select="selectData">
+		<ListCheckBox :disabledAll="true" :data="data" @select="selectData">
 			<template v-slot:checkSlot="item">
 				<view class="test">
 					<text>{{item.data.name}}</text>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import ListCheckBox from '@/components/ListCheckBox.vue'
+	import ListCheckBox from '@/components/peng-ListCheckBox/ListCheckBox.vue'
 	export default {
 		data() {
 			return {
