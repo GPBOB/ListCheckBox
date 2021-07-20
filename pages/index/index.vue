@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<ListCheckBox :disabledAll="true" :data="data" @select="selectData">
+		<ListCheckBox :disabledAll="false" :data="data" :activeSize="20" :size="30" position="right" @select="selectData">
 			<template v-slot:checkSlot="item">
 				<view class="test">
 					<text>{{item.data.name}}</text>
