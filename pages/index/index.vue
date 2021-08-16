@@ -1,7 +1,14 @@
 <template>
 	<view class="content">
 		<ListCheckBox :disabledAll="false" :data="data" :activeSize="20" :size="30" position="right" @select="selectData">
-			<template v-slot:checkSlot="item">
+			<template slote-scope="item">
+				<view class="test">
+					<text>sdfhsdjfk</text>
+					<text>{{item}}</text>
+					<text>{{item.value}}</text>
+				</view>
+			</template>
+			<!-- <template v-slot:checkSlot="item">
 				<view class="test">
 					<text>{{item.data.name}}</text>
 					<text>{{item.data.value}}</text>
@@ -12,7 +19,7 @@
 			</template>
 			<template v-slot:customDisabledBtn>
 				<image style="width: 30rpx;height: 30rpx;" src="../../static/disabledSel.png" mode=""></image>
-			</template>
+			</template> -->
 		</ListCheckBox>
 	</view>
 </template>
@@ -25,18 +32,17 @@
 				data: [{
 						name: '名称一',
 						value: '可自定义内容',
-						selected: true
+						
 					},
 					{
 						name: '名称二',
 						value: 2,
-						disabled: true,
-						selected: true
+						
 					},
 					{
 						name: '名称三',
 						value: 3,
-						disabled: true,
+						
 					},
 					{
 						name: '名称四',
@@ -53,7 +59,7 @@
 		},
 		methods: {
 			selectData(data) {
-				console.log(data)
+				// console.log(data)
 			}
 		}
 	}
