@@ -22,6 +22,13 @@
 |  ----  | ----  | 
 |  select | 选中的数据 |
 
+如要自定义全选功能，获取全选的数据可使用$refs操作  调用selectAllData方法 上述select方法将会返回选中数据
+```
+selectAll(){
+	this.$refs.listcheckbox.selectAllData()
+}
+```
+
 ## data数据说明：
 
 data数据格式为：
@@ -51,7 +58,6 @@ data数据格式为：
         </div>
  </template>
 ```
-
 
 ## 使用方法(例子)
 

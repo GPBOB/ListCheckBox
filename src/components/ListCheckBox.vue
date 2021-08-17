@@ -9,8 +9,9 @@
         'padding-bottom': padding + 'px',
       }"
     >
+    <p v-if="position == 'right'" style="width: calc(100% - 40px)">{{ allText }}</p>
       <div
-        v-if="!disabledAll && position == 'left'"
+        v-if="!disabledAll"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -33,7 +34,7 @@
         <slot v-if="isSelectAll && type == 'custom'" name="customBtn"></slot>
       </div>
       <div
-        v-show="disabledAll && position == 'left'"
+        v-show="disabledAll"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -55,56 +56,8 @@
           }"
         ></div>
       </div>
-      <p style="width: calc(100% - 40px)">{{ allText }}</p>
+      <p v-if="position == 'left'"  style="width: calc(100% - 40px)">{{ allText }}</p>
       <!-- 右边按钮 -->
-      <div
-        v-if="!disabledAll && position == 'right'"
-        class="lcb-check-btn"
-        :style="{
-          'border-radius': type == 'circle' && '50%',
-          'border-color': linkBorder && defaultColor,
-          width: size + 'px',
-          height: size + 'px',
-        }"
-        style="margin-left: 20px"
-        @click="selectAllData"
-      >
-        <div
-          v-if="isSelectAll && type != 'custom'"
-          class="lcb-check-btn-active"
-          :style="{
-            'background-color': defaultColor,
-            'border-radius': type == 'circle' && '50%',
-            width: activeSize + 'px',
-            height: activeSize + 'px',
-          }"
-        ></div>
-        <slot v-if="isSelectAll && type == 'custom'" name="customBtn"></slot>
-      </div>
-      <div
-        v-show="disabledAll && position == 'right'"
-        class="lcb-check-btn"
-        :style="{
-          'border-radius': type == 'circle' && '50%',
-          width: size + 'px',
-          height: size + 'px',
-        }"
-        style="margin-left: 20px"
-      >
-        <slot v-if="type == 'custom'" name="customDisabledBtn"></slot>
-        <div
-          v-else
-          :class="[
-            'lcb-check-btn-disabled',
-            isSelectAll && 'lcb-check-btn-disabled-check',
-          ]"
-          :style="{
-            'border-radius': type == 'circle' && '50%',
-            width: size + 'px',
-            height: size + 'px',
-          }"
-        ></div>
-      </div>
     </div>
     <div class="lcb-content">
       <div
@@ -116,9 +69,12 @@
           'padding-bottom': padding + 'px'
         }"
       >
+      <div v-if="position == 'right'" style="width: calc(100% - 40px)">
+          <slot name="checkSlot" :data="data[index]"></slot>
+        </div>
         <!-- 左侧按钮 -->
         <div
-          v-show="!item.disabled && position == 'left'"
+          v-show="!item.disabled"
           class="lcb-check-btn"
           :style="{
             'border-radius': type == 'circle' && '50%',
@@ -145,7 +101,7 @@
         </div>
 
         <div
-          v-show="item.disabled && position == 'left'"
+          v-show="item.disabled"
           class="lcb-check-btn"
           :style="{
             'border-radius': type == 'circle' && '50%',
@@ -167,59 +123,8 @@
             }"
           ></div>
         </div>
-        <div style="width: calc(100% - 40px)">
+        <div v-if="position == 'left'" style="width: calc(100% - 40px)">
           <slot name="checkSlot" :data="data[index]"></slot>
-        </div>
-        <!-- 右侧按钮 -->
-        <div
-          v-show="!item.disabled && position == 'right'"
-          class="lcb-check-btn"
-          :style="{
-            'border-radius': type == 'circle' && '50%',
-            'border-color': linkBorder && defaultColor,
-            width: size + 'px',
-            height: size + 'px',
-          }"
-          @click="select(item, index)"
-        >
-          <div
-            v-if="item.selected && type != 'custom'"
-            class="lcb-check-btn-active"
-            :style="{
-              'background-color': defaultColor,
-              'border-radius': type == 'circle' && '50%',
-              width: activeSize + 'px',
-              height: activeSize + 'px',
-            }"
-          ></div>
-          <slot
-            v-if="item.selected && type == 'custom'"
-            name="customBtn"
-          ></slot>
-        </div>
-
-        <div
-          v-show="item.disabled && position == 'right'"
-          class="lcb-check-btn"
-          :style="{
-            'border-radius': type == 'circle' && '50%',
-            width: size + 'px',
-            height: size + 'px',
-          }"
-        >
-          <slot v-if="type == 'custom'" name="customDisabledBtn"></slot>
-          <div
-            v-else
-            :class="[
-              'lcb-check-btn-disabled',
-              item.selected && 'lcb-check-btn-disabled-check',
-            ]"
-            :style="{
-              'border-radius': type == 'circle' && '50%',
-              width: size + 'px',
-              height: size + 'px',
-            }"
-          ></div>
         </div>
       </div>
     </div>

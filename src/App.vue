@@ -3,6 +3,7 @@
     <ListCheckBox
       :selectAll="false"
       :disabledAll="true"
+      position="right"
       :data="data"
       @select="selectData"
     >
