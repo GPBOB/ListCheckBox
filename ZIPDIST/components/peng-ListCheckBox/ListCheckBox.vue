@@ -1,72 +1,63 @@
 <template>
 	<view class="lcb-container">
-		<view class="lcb-all" v-if="isAll" :style="{'padding-top':padding+'px','padding-bottom':padding+'px'}">
-			<!-- 按钮左边 -->
-			<view v-if="!disabledAll && position == 'left'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
-          height: size + 'px'
-				}" @click="selectAllData">
-				<view v-if="isSelectAll && type!='custom'" class="lcb-check-btn-active" :style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%',
-					width: activeSize + 'px',
-					            height: activeSize + 'px'}"></view>
+		<view class="lcb-all" v-if="isAll" :style="{'padding-top':padding+'px','padding-bottom':padding+'px'}"
+			style="justify-content: flex-end;">
+			<!-- 内容右 -->
+			<text style="width: calc(100% - 40px)" v-if="position == 'right'">{{allText}}</text>
+			<!-- 点击效果 -->
+			<view v-if="!disabledAll && !hiddenButton" class="lcb-check-btn"
+				:style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',height: size + 'px'}"
+				@click="selectAllData">
+				<view v-if="isSelectAll && type!='custom'" class="lcb-check-btn-active"
+					:style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%',width: activeSize + 'px',height: activeSize + 'px'}">
+				</view>
+				<!-- 自定义按钮 -->
+				<!-- #ifndef MP-WEIXIN -->
 				<slot v-if="isSelectAll&&type=='custom'" name="customBtn"></slot>
+				<!-- #endif -->
+				
 			</view>
-			<view v-if="disabledAll && position == 'left'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
+			<!-- 禁止点击效果 -->
+			<view v-if="disabledAll && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
           height: size + 'px'}">
+				<!-- 自定义按钮 -->
+				<!-- #ifndef MP-WEIXIN -->
 				<slot v-if="type=='custom'" name="customDisabledBtn"></slot>
-				<view v-else :class="['lcb-check-btn-disabled',isSelectAll&&'lcb-check-btn-disabled-check']"
+				<!-- #endif -->
+				<view v-if="type!='custom'"
+					:class="['lcb-check-btn-disabled',isSelectAll&&'lcb-check-btn-disabled-check']"
 					:style="{'border-radius':type=='circle'&&'50%'}"></view>
 			</view>
-			<text style="width: calc(100% - 40px)">{{allText}}</text>
-			<!-- 按钮右边 -->
-			<view v-if="!disabledAll && position == 'right'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
-          height: size + 'px'}" @click="selectAllData">
-				<view v-if="isSelectAll && type!='custom'" class="lcb-check-btn-active" :style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%',width: activeSize + 'px',
-            height: activeSize + 'px'}"></view>
-				<slot v-if="isSelectAll&&type=='custom'" name="customBtn"></slot>
-			</view>
-			<view v-if="disabledAll && position == 'right'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
-          height: size + 'px'}">
-				<slot v-if="type=='custom'" name="customDisabledBtn"></slot>
-				<view v-else :class="['lcb-check-btn-disabled',isSelectAll&&'lcb-check-btn-disabled-check']" :style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
-          height: size + 'px'}"></view>
-			</view>
+			<!-- 内容左 -->
+			<text style="width: calc(100% - 40px)" v-if="position == 'left'">{{allText}}</text>
 		</view>
 		<view class="lcb-content">
+
 			<view class="lcb-item" v-for="(item,index) in checkData" :key="index"
 				:style="{'padding-top':padding+'px','padding-bottom':padding+'px'}">
-				<!-- 左侧按钮 -->
-				<view v-if="!item.disabled && position == 'left'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
-            height: size + 'px',}" @click="select(item,index)">
-					<view v-if="item.selected && type!='custom'" class="lcb-check-btn-active" :style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%', width: activeSize + 'px',
-              height: activeSize + 'px'}"></view>
-					<slot v-if="item.selected&&type=='custom'" name="customBtn"></slot>
-				</view>
-				<view v-show="item.disabled && position == 'left'" class="lcb-check-btn"
-					:style="{'border-radius':type=='circle'&&'50%'}">
-					<slot v-if="type=='custom'" name="customDisabledBtn"></slot>
-					<view v-else :class="['lcb-check-btn-disabled',item.selected&&'lcb-check-btn-disabled-check']"
-						:style="{'border-radius':type=='circle'&&'50%', width: size + 'px',
-            height: size + 'px'}"></view>
-
-				</view>
-				<view style="width: calc(100% - 40px)">
+				<!-- 右侧内容 -->
+				<view style="width: calc(100% - 40px)" v-if="position == 'right'">
 					<slot name="checkSlot" :data="data[index]"></slot>
 				</view>
-				<!-- 右侧按钮 -->
-				<view v-if="!item.disabled && position == 'right'" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
-            height: size + 'px',}" @click="select(item,index)">
+				
+				<view v-if="!item.disabled && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
+            height: size + 'px'}" @click="select(item,index)">
 					<view v-if="item.selected && type!='custom'" class="lcb-check-btn-active" :style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%', width: activeSize + 'px',
               height: activeSize + 'px'}"></view>
+					<!-- #ifndef MP-WEIXIN -->
 					<slot v-if="item.selected&&type=='custom'" name="customBtn"></slot>
+					<!-- #endif -->
 				</view>
-				<view v-show="item.disabled && position == 'right'" class="lcb-check-btn"
-					:style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
-            height: size + 'px'}">
+				<view v-if="item.disabled  && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%'}">
+					<!-- #ifndef MP-WEIXIN -->
 					<slot v-if="type=='custom'" name="customDisabledBtn"></slot>
-					<view v-else :class="['lcb-check-btn-disabled',item.selected&&'lcb-check-btn-disabled-check']"
-						:style="{'border-radius':type=='circle'&&'50%', width: size + 'px',
-            height: size + 'px'}"></view>
-
+					<!-- #endif -->
+					<view v-if="type!='custom'" :class="['lcb-check-btn-disabled',item.selected&&'lcb-check-btn-disabled-check']"
+						:style="{'border-radius':type=='circle'&&'50%', width: size + 'px',height: size + 'px'}"></view>
+				</view>
+				<!-- 左侧内容 -->
+				<view style="width: calc(100% - 40px)" v-if="position == 'left'">
+					<slot name="checkSlot" :data="data[index]"></slot>
 				</view>
 			</view>
 		</view>
@@ -120,6 +111,11 @@
 			data: {
 				type: Array,
 				default: []
+			},
+			//隐藏选择按钮
+			hiddenButton:{
+				type: Boolean,
+				default: false
 			},
 			//全选text
 			allText: {
@@ -234,8 +230,8 @@
 
 <style lang="scss" scoped>
 	.lcb-check-btn {
-		width: 32rpx;
-		height: 32rpx;
+		// width: 32rpx;
+		// height: 32rpx;
 		border: 2rpx solid #B8B9BA;
 		margin-right: 40rpx;
 		display: flex;
@@ -246,8 +242,8 @@
 
 	.lcb-check-btn-active {
 		display: inline-block;
-		width: 20rpx;
-		height: 20rpx;
+		// width: 20rpx;
+		// height: 20rpx;
 		background-color: #000;
 	}
 

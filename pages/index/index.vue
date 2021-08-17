@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<ListCheckBox ref="listcheckbox" :isAll="false" :data="data" :activeSize="20" :size="30" position="right" @select="selectData">
+		<ListCheckBox ref="listcheckbox" :isAll="true" :hiddenButton="hiddenButton" :data="data" :activeSize="20" :size="30" position="left" @select="selectData">
 			<template v-slot:checkSlot="{data}">
 				<view class="test">
 					<text>{{data.name}}</text>
@@ -14,7 +14,7 @@
 				<image style="width: 30rpx;height: 30rpx;" src="../../static/disabledSel.png" mode=""></image>
 			</template>
 		</ListCheckBox>
-		<button type="default" @click="selectAll">全选</button>
+		<button type="default" @click="changeHiddenBtn">全选</button>
 	</view>
 </template>
 
@@ -31,7 +31,6 @@
 					{
 						name: '名称二',
 						value: 2,
-						
 					},
 					{
 						name: '名称三',
@@ -46,7 +45,8 @@
 						name: '名称5',
 						value: 5
 					}
-				]
+				],
+				hiddenButton:true
 			}
 		},
 		components: {
@@ -61,6 +61,9 @@
 			},
 			selectAll(){
 				this.$refs.listcheckbox.selectAllData()
+			},
+			changeHiddenBtn(){
+				this.hiddenButton=!this.hiddenButton
 			}
 		}
 	}
