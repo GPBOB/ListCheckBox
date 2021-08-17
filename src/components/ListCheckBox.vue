@@ -11,7 +11,7 @@
     >
     <p v-if="position == 'right'" style="width: calc(100% - 40px)">{{ allText }}</p>
       <div
-        v-if="!disabledAll"
+        v-if="!disabledAll && !hiddenButton"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -34,7 +34,7 @@
         <slot v-if="isSelectAll && type == 'custom'" name="customBtn"></slot>
       </div>
       <div
-        v-show="disabledAll"
+        v-show="disabledAll && !hiddenButton"
         class="lcb-check-btn"
         :style="{
           'border-radius': type == 'circle' && '50%',
@@ -74,7 +74,7 @@
         </div>
         <!-- 左侧按钮 -->
         <div
-          v-show="!item.disabled"
+          v-show="!item.disabled && !hiddenButton"
           class="lcb-check-btn"
           :style="{
             'border-radius': type == 'circle' && '50%',
@@ -101,7 +101,7 @@
         </div>
 
         <div
-          v-show="item.disabled"
+          v-show="item.disabled && !hiddenButton"
           class="lcb-check-btn"
           :style="{
             'border-radius': type == 'circle' && '50%',
@@ -169,7 +169,11 @@ export default {
       type: Boolean,
       default: true,
     },
-
+    //是否显示全选
+    hiddenButton: {
+      type: Boolean,
+      default: false,
+    },
     //禁止全选
     disabledAll: {
       type: Boolean,

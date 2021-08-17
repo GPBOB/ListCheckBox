@@ -16,6 +16,7 @@
 | size  | number | 16 | 否 | 按钮大小 |
 | activeSize  | number | 10 | 否 | 按钮选中大小 |
 | position  | string | left | 否 | 按钮位置 (left,right) |
+| hiddenButton  | boolean | false | 否 | 隐藏选择按钮 |
 
 ## 方法
 |  方法名 | 返回值 |
