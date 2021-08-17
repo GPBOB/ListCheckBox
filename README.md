@@ -6,7 +6,7 @@
 |  ----  | ----  | ---- |  ---- | ---- |
 | defaultColor  | string | #1989fa(蓝色) | 否 | 默认主题色 | 
 | linkBorder  |  boolean | true | 否 |复选框边界和配置色统一 |
-| type  |  string | pane | 否 |选择按钮类型 pane-方框，circle-圆形，custom-自定义 |
+| type  |  string | pane | 否 |选择按钮类型 pane-方框，circle-圆形，custom-自定义(小程序不支持自定义) |
 | selectAll  | boolean | false | 否 |是否全选 |
 | isAll  | boolean | true | 否 |是否显示全选按钮 |
 | disabledAll  |  boolean | false | 否 |禁止全选 |
@@ -21,6 +21,13 @@
 |  方法名 | 返回值 |
 |  ----  | ----  | 
 |  select | 选中的数据 |
+
+如要自定义全选功能，获取全选的数据可使用$refs操作  调用selectAllData方法 上述select方法将会返回选中数据
+```
+selectAll(){
+	this.$refs.listcheckbox.selectAllData()
+}
+```
 
 ## data数据说明：
 
@@ -44,6 +51,7 @@ data数据格式为：
 其余数据可自定义设置
 
 ## 自定义内容
+### 微信小程序不支持按钮自定义
 ```
  <template v-slot:checkSlot="item">
  	<view class="test">
@@ -51,6 +59,17 @@ data数据格式为：
  		<text>{{item.data.value}}</text>
  	</view>
  </template>
+```
+## 按钮自定义
+```
+//点击按钮自定义
+<template v-slot:customBtn>
+	<image style="width: 30rpx;height: 30rpx;" src="../../static/select.png" mode=""></image>
+</template>
+//禁用按钮自定义
+<template v-slot:customDisabledBtn>
+	<image style="width: 30rpx;height: 30rpx;" src="../../static/disabledSel.png" mode=""></image>
+</template>
 ```
 
 ## 使用方法(例子)

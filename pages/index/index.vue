@@ -1,17 +1,10 @@
 <template>
 	<view class="content">
-		<ListCheckBox :disabledAll="false" :data="data" :activeSize="20" :size="30" position="right" @select="selectData">
-			<template slote-scope="item">
+		<ListCheckBox ref="listcheckbox" :isAll="false" :data="data" :activeSize="20" :size="30" position="right" @select="selectData">
+			<template v-slot:checkSlot="{data}">
 				<view class="test">
-					<text>sdfhsdjfk</text>
-					<text>{{item}}</text>
-					<text>{{item.value}}</text>
-				</view>
-			</template>
-			<!-- <template v-slot:checkSlot="item">
-				<view class="test">
-					<text>{{item.data.name}}</text>
-					<text>{{item.data.value}}</text>
+					<text>{{data.name}}</text>
+					<text>{{data.value}}</text>
 				</view>
 			</template>
 			<template v-slot:customBtn>
@@ -19,8 +12,9 @@
 			</template>
 			<template v-slot:customDisabledBtn>
 				<image style="width: 30rpx;height: 30rpx;" src="../../static/disabledSel.png" mode=""></image>
-			</template> -->
+			</template>
 		</ListCheckBox>
+		<button type="default" @click="selectAll">全选</button>
 	</view>
 </template>
 
@@ -32,7 +26,7 @@
 				data: [{
 						name: '名称一',
 						value: '可自定义内容',
-						
+						disabled:true
 					},
 					{
 						name: '名称二',
@@ -47,6 +41,10 @@
 					{
 						name: '名称四',
 						value: 4
+					},
+					{
+						name: '名称5',
+						value: 5
 					}
 				]
 			}
@@ -59,7 +57,10 @@
 		},
 		methods: {
 			selectData(data) {
-				// console.log(data)
+				console.log(data)
+			},
+			selectAll(){
+				this.$refs.listcheckbox.selectAllData()
 			}
 		}
 	}
