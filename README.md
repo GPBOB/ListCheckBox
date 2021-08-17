@@ -1,6 +1,8 @@
 # ListCheckBox
 ## 效果图
 ![效果图](https://i.ibb.co/VjNygjH/1623909556-1.png)
+![效果图](https://i.postimg.cc/SXKb88SL/20210817134256.png)
+![效果图](https://i.postimg.cc/bGFcRJr7/20210817134301.png)
 ## 使用说明
 |  参数  | 类型 | 默认值 | 必填 |说明 |
 |  ----  | ----  | ---- |  ---- | ---- |

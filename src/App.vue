@@ -2,8 +2,9 @@
   <div class="content">
     <ListCheckBox
       :selectAll="false"
+      :isAll="false"
       :disabledAll="true"
-      position="right"
+      :hiddenButton="true"
       :data="data"
       @select="selectData"
     >
