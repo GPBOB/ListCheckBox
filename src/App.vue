@@ -1,10 +1,11 @@
 <template>
   <div class="content">
     <ListCheckBox
-      :selectAll="false"
+    ref="list"
+      
       :isAll="false"
       :disabledAll="true"
-      :hiddenButton="true"
+
       :data="data"
       @select="selectData"
     >
@@ -21,6 +22,8 @@
         <img style="width:16px;height:16px" src="./static/disabledSel.png" alt="">
       </template>
     </ListCheckBox>
+    <button @click="clear">清空</button>
+    <button @click="getData">获取</button>
   </div>
 </template>
 
@@ -53,6 +56,7 @@ export default {
           value: 4,
         },
       ],
+      selData:[]
     };
   },
   components: {
@@ -60,8 +64,15 @@ export default {
   },
   methods: {
     selectData(data) {
-      console.log(data);
+      
+      this.selData=data
     },
+    getData(){
+      console.log( this.selData);
+    },
+    clear(){
+      this.$refs.list.reset()
+    }
   },
 };
 </script>

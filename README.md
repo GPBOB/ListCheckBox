@@ -24,6 +24,8 @@
 |  方法名 | 返回值 |
 |  ----  | ----  | 
 |  select | 选中的数据 |
+|  $refs.xx.selectAllData | 全选数据 |
+|  $refs.xx.reset | 重置选项 |
 
 如要自定义全选功能，获取全选的数据可使用$refs操作  调用selectAllData方法 上述select方法将会返回选中数据
 ```

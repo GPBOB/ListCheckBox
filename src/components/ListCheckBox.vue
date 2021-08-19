@@ -270,6 +270,15 @@ export default {
       this.$forceUpdate();
       this.$emit("select", this.selectData);
     },
+    // 重置选项
+			reset(){
+        this.selectData = [];
+        this.selectIndexData = [];
+				this.checkData.map(el=>{
+					el.selected=false
+				})
+         this.$emit("select", this.selectData);
+			}
   },
   mounted() {
     this.isSelectAll = this.selectAll;
