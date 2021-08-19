@@ -15,7 +15,7 @@
 				<!-- #ifndef MP-WEIXIN -->
 				<slot v-if="isSelectAll&&type=='custom'" name="customBtn"></slot>
 				<!-- #endif -->
-				
+
 			</view>
 			<!-- 禁止点击效果 -->
 			<view v-if="disabledAll && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%',width: size + 'px',
@@ -39,7 +39,7 @@
 				<view style="width: calc(100% - 40px)" v-if="position == 'right'">
 					<slot name="checkSlot" :data="data[index]"></slot>
 				</view>
-				
+
 				<view v-if="!item.disabled && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%','border-color':linkBorder&&defaultColor, width: size + 'px',
             height: size + 'px'}" @click="select(item,index)">
 					<view v-if="item.selected && type!='custom'" class="lcb-check-btn-active" :style="{'background-color':defaultColor,'border-radius':type=='circle'&&'50%', width: activeSize + 'px',
@@ -48,11 +48,13 @@
 					<slot v-if="item.selected&&type=='custom'" name="customBtn"></slot>
 					<!-- #endif -->
 				</view>
-				<view v-if="item.disabled  && !hiddenButton" class="lcb-check-btn" :style="{'border-radius':type=='circle'&&'50%'}">
+				<view v-if="item.disabled  && !hiddenButton" class="lcb-check-btn"
+					:style="{'border-radius':type=='circle'&&'50%'}">
 					<!-- #ifndef MP-WEIXIN -->
 					<slot v-if="type=='custom'" name="customDisabledBtn"></slot>
 					<!-- #endif -->
-					<view v-if="type!='custom'" :class="['lcb-check-btn-disabled',item.selected&&'lcb-check-btn-disabled-check']"
+					<view v-if="type!='custom'"
+						:class="['lcb-check-btn-disabled',item.selected&&'lcb-check-btn-disabled-check']"
 						:style="{'border-radius':type=='circle'&&'50%', width: size + 'px',height: size + 'px'}"></view>
 				</view>
 				<!-- 左侧内容 -->
@@ -113,7 +115,7 @@
 				default: []
 			},
 			//隐藏选择按钮
-			hiddenButton:{
+			hiddenButton: {
 				type: Boolean,
 				default: false
 			},
@@ -200,6 +202,15 @@
 				}
 				this.$forceUpdate()
 				this.$emit('select', this.selectData)
+			},
+			// 重置选项
+			reset() {
+				this.selectData = [];
+				this.selectIndexData = [];
+				this.checkData.map(el => {
+					el.selected = false
+				})
+				this.$emit("select", this.selectData);
 			}
 		},
 		mounted() {
